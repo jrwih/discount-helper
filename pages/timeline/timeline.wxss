@@ -1,0 +1,54 @@
+/* pages/timeline/timeline.wxss */
+
+.timeline_container{
+    width: 100%;
+    height: 100vh;
+    white-space: nowrap;
+}
+
+/*顶部日期选择，需要添加月日
+点击后展示具体页面*/
+.timeline_container .timeline_header{
+    width: 100%;
+    height: fit-content;
+    background-color: #fff;
+}
+/*默认展示当前日期页面*/
+.timeline_container .timeline_header .date{
+    width: 150rpx;
+    height: 100rpx;
+    background-color: rgba(0,0,0,0);
+    display: inline-grid;
+    justify-content: center;
+}
+.timeline_container .timeline_header .date .day{
+    font-size: smaller;
+    display: flex;
+    justify-content: center;
+}
+.timeline_container .timeline_header .date .week{
+    width: 54rpx;
+    height: 54rpx;
+    background-color: rgba(0,0,0,0);
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+}
+.timeline_container .timeline_header #date0 .week{
+  background-color: #87ceeb;
+}
+.timeline_container .timeline_header .hover{
+    position: relative;
+    top: 2rpx;
+    box-shadow: 0rpx 0rpx 4rpx #bbbec4 inset;
+    opacity: 0.87;
+}
+
+/*body*/
+.timeline_container .timeline_body{
+    width: 100%;
+    height: 100%;
+    background-color: #eee;
+    box-shadow: 0rpx 0rpx 6rpx black inset;
+}

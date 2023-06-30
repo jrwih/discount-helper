@@ -1,0 +1,38 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/test/test",
+        "pages/detail/detail",
+        "pages/timeline/timeline",
+        "pages/logs/logs"
+        ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "优惠助手",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "list": [
+        {
+          "pagePath": "pages/index/index",
+          "text": "首页"
+        },
+        {
+            "pagePath": "pages/timeline/timeline",
+            "text": "优惠时间表"
+        },
+        {
+            "pagePath": "pages/detail/detail",
+            "text": "优惠详情"
+        },
+        {
+          "pagePath": "pages/test/test",
+          "text": "测试"
+        }
+    ]
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json",
+    "lazyCodeLoading": "requiredComponents"
+}

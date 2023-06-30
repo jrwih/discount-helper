@@ -1,0 +1,12 @@
+<!--pages/test/test.wxml-->
+<text user-select="1">pages/test/test.wxml</text>
+
+<scroll-view class = "container_1"scroll-y>
+    <view>甲</view>
+    <view>乙</view>
+    <view>丙</view>
+    <view>丁</view>
+    <root-portal>
+        <view class="mask"></view>
+    </root-portal>
+</scroll-view>

@@ -1,0 +1,8 @@
+<!--index.wxml-->
+
+<!--配置导航栏后必须使用switchTab或reLaunch模式-->
+<navigator url="/pages/timeline/timeline" open-type="reLaunch" hover-class="none">
+    <view class="container">优惠助手</view>
+</navigator>
+
+<image src="/static/images/gif001.gif" mode="aspectFit"/>
