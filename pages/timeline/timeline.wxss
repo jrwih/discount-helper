@@ -6,25 +6,25 @@
     white-space: nowrap;
 }
 
-.timeline_container .timeline_header{
+.timeline_header{
     width: 100%;
     height: fit-content;
     background-color: #fff;
 }
 /*默认展示当前日期页面*/
-.timeline_container .timeline_header .timeline_date{
+.timeline_header .timeline_date{
     width: 107rpx;
     height: 100rpx;
     background-color: rgba(0,0,0,0);
     display: inline-grid;
     justify-content: center;
 }
-.timeline_container .timeline_header .timeline_date .timeline_day{
+.timeline_date .timeline_day{
     font-size: smaller;
     display: flex;
     justify-content: center;
 }
-.timeline_container .timeline_header .timeline_date .timeline_week{
+.timeline_date .timeline_week{
     width: 54rpx;
     height: 54rpx;
     background-color: rgba(0,0,0,0);
@@ -33,10 +33,10 @@
     justify-content: center;
     border-radius: 50%;
 }
-.timeline_container .timeline_header #timeline_date0 .timeline_week{
+#timeline_date0 .timeline_week{
   background-color: #87ceeb;
 }
-.timeline_container .timeline_header .hover{
+.timeline_header .hover{
     position: relative;
     top: 2rpx;
     box-shadow: 0rpx 0rpx 4rpx #bbbec4 inset;
@@ -52,14 +52,37 @@
     /*利用shadow充当border*/
     box-shadow: 0rpx 0rpx 6rpx black inset;
 }
-.timeline_container .timeline_body .timeline_event{
-    width: 650rpx;
-    height: fit-content;
-    background-color: aquamarine;
+.timeline_body .timeline_swiper_item{
+    /*通过flex-direction设置主轴方向为column，然后通过align-items设置副轴居中而达到水平居中*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-.timeline_container .timeline_body .timeline_event .gap{
-    width: 100rpx;
+.timeline_swiper_item .timeline_event{
+    width: 100%;
+    height: fit-content;
+    background-color: rgba(0,0,0,0);
+    display: inline-flex;
+}
+.timeline_event .gap{
+    width: 80rpx;
     height: 100rpx;
-    background-color: balck;
+    background-color: rgba(0,0,0,0);
+}
+.timeline_event .time{
+    font-size: 28rpx;
+    font-weight: normal;
+    color: #777;
+    text-decoration: underline;
+    border-left: #bbb solid;
+    border-width: thin;
+}
+.timeline_event .logo{
+    /*logo比例尽量保持在16:9*/
+    width: 320rpx;
+    height: 180rpx;
+}
+.timeline_event .event{
+    width: 240rpx;
+    font-size: 40rpx;
 }

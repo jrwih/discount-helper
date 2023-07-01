@@ -25,6 +25,7 @@ function tapDate(event,ins){
 
 /**监听下方活动栏事件，change时同步改变日期栏 */
 function changeSwiper(event,ins){
+    /**从event.detail访问swiper的详细数据 */
     lastDate = newDate;
     newDate = event.detail.current;
     /**将上一次选择的日期背景改为none，再修改这一次的日期背景 */

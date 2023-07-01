@@ -5,27 +5,30 @@
     <view class="timeline_container">
         <scroll-view class="timeline_header" scroll-x="1">
             <!--重复渲染7个日期date-->
-            <block wx:for="{{[0,1,2,3,4,5,6]}}" wx:key="*this" wx:for-item="i">
+            <block wx:for="{{[0,1,2,3,4,5,6]}}" wx:key="*this" wx:for-item="dateid">
                 <view class="timeline_date" hover-class="hover" hover-stay-time="100"
-                 id="timeline_date{{i}}" data-i-Date="{{i}}" bind:tap="{{wxs.tapDate}}">
-                    <view class="timeline_day">{{Month[i]}}-{{Day[i]}}</view>
+                 id="timeline_date{{dateid}}" data-i-Date="{{dateid}}" bind:tap="{{wxs.tapDate}}">
+                    <view class="timeline_day">{{Month[dateid]}}-{{Day[dateid]}}</view>
                     <!--为了视觉效果频繁变动week的背景，在wxs中频繁引用-->
-                    <view class="timeline_week">{{Week[i]}}</view>
+                    <view class="timeline_week">{{Week[dateid]}}</view>
                 </view>
             </block>
         </scroll-view>
         <swiper class="timeline_body" easing-function="easeInCubic" duration="150" 
          current="{{swiperCurrent}}" bind:change="{{wxs.changeSwiper}}">
             <!--重复渲染7个活动表swiper-item-->
-            <block wx:for="{{[0,1,2,3,4,5,6]}}" wx:key="*this">
-                <!--通过flex-direction设置主轴方向为column，然后通过align-items设置副轴居中而达到水平居中-->
-                <swiper-item class="timeline_swiper-item">
-                  <!--for循环重复渲染eventList中的各项活动-->
-                    <block wx:for="{{eventList}}" wx:key="*this" wx:for-index="eventid">
-                      <!--if判断活动在当前日期是否进行渲染-->
-                        <view class="timeline_event" wx:if="1">
+            <block wx:for="{{[0,1,2,3,4,5,6]}}" wx:key="*this" wx:for-index="dateid">
+                <swiper-item class="timeline_swiper_item">
+                    <!--for循环重复渲染eventList中的各项活动，输入list确定渲染哪些活动-->
+                    <block wx:for="{{List[dateid]}}" wx:key="*this" wx:for-index="eventid">
+                        <view class="timeline_event">
                             <view class="gap"/>
-                            {{eventList[eventid]}}
+                            <view class="time">{{List[dateid][eventid].time}}</view>
+                            <image class="logo" src="{{List[dateid][eventid].logo}}"></image>
+                            <view class="event">
+                                <view class="brandname">{{List[dateid][eventid].brandname}}</view>
+                                <view class="eventname">{{List[dateid][eventid].eventname}}</view>
+                            </view>
                         </view>
                     </block>
                 </swiper-item>
