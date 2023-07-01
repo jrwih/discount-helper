@@ -45,6 +45,39 @@ class myEvent{
         this.time = eventTime;
     }
 }
+var aED = new Array(0);/**allEventDetail所有活动的字符串数据 */
+/**可用于自定义的活动详情 */
+var ED = new Array(
+    'brand',//品牌名
+    'event',//活动名
+    '/static/images/logo/logo.png',//logo
+    0,//某天
+    -1,//每周几,-1为无
+    0,//每月几号
+    0//具体时间
+    );
+var KFC = new Array(
+    'KFC',//品牌名
+    '疯狂星期四',//活动名
+    '/static/images/logo/Kfc_logo.png',//logo
+    0,//某天
+    4,//每周几
+    0,//每月几号
+    '10:00'//具体时间
+    );
+aED[0] = KFC;
+var McDonalds = new Array(
+    'McDonalds',//品牌名
+    '麦当劳会员日',//活动名
+    '/static/images/logo/McDonalds-logo.png',//logo
+    0,//某天
+    [0,6],//每周几
+    0,//每月几号
+    "10:30"//具体时间
+    );
+aED[1] = McDonalds;
+/**allEvent记录所有活动数据，选择性加入eventList */
+var allEvent = new Array(0);
 
 Page({
 
@@ -70,13 +103,16 @@ Page({
         /**初始化一周的日期数据 */
         let week = new myWeek(nowDate);
         week.setNextWeek();
-        /**初始化一周的活动数据，在JSON中配置 */
-        let event0 = new myEvent('KFC','疯狂星期四','/static/images/logo/Kfc_logo.png',0,4,0,'10:30');
-        let event1 = new myEvent('McDonalds','麦当劳会员日','/static/images/logo/McDonalds-logo.png',0,[0,6],0,"10:30");
-        eventList[0] = event0;
-        eventList[1] = event1;
+        /**初始化一周的活动数据，测试中 */
+        for(var i = 0;i<aED.length;i++){
+            allEvent[i] = new myEvent(aED[i][0],aED[i][1],aED[i][2],aED[i][3],aED[i][4],aED[i][5],aED[i][6],)
+        }
+        eventList[0] = allEvent[0];
+        eventList[1] = allEvent[1];
         List[0] = eventList;
+        //console.log(JSON.stringify(allEvent[0]))
       }
+      /**设置Data中的数据 */
       this.setData({
           Month : Month,
           Week : Week,
