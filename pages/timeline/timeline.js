@@ -54,6 +54,11 @@ Page({
         Week : [0],
         Day : [0],
         swiperCurrent : 0,
+        eventList:[
+            'KFC',
+            'McDonald',
+            'StarBucks'
+        ]
     },
 
     /**wxs调用的callMethod函数，用于同步header与swiper状态 */

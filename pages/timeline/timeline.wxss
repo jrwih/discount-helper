@@ -6,27 +6,25 @@
     white-space: nowrap;
 }
 
-/*顶部日期选择，需要添加月日
-点击后展示具体页面*/
 .timeline_container .timeline_header{
     width: 100%;
     height: fit-content;
     background-color: #fff;
 }
 /*默认展示当前日期页面*/
-.timeline_container .timeline_header .date{
-    width: 150rpx;
+.timeline_container .timeline_header .timeline_date{
+    width: 107rpx;
     height: 100rpx;
     background-color: rgba(0,0,0,0);
     display: inline-grid;
     justify-content: center;
 }
-.timeline_container .timeline_header .date .day{
+.timeline_container .timeline_header .timeline_date .timeline_day{
     font-size: smaller;
     display: flex;
     justify-content: center;
 }
-.timeline_container .timeline_header .date .week{
+.timeline_container .timeline_header .timeline_date .timeline_week{
     width: 54rpx;
     height: 54rpx;
     background-color: rgba(0,0,0,0);
@@ -35,7 +33,7 @@
     justify-content: center;
     border-radius: 50%;
 }
-.timeline_container .timeline_header #date0 .week{
+.timeline_container .timeline_header #timeline_date0 .timeline_week{
   background-color: #87ceeb;
 }
 .timeline_container .timeline_header .hover{
@@ -48,7 +46,20 @@
 /*body*/
 .timeline_container .timeline_body{
     width: 100%;
+    /*height: 100%刚好可以实现上划隐藏header*/
     height: 100%;
     background-color: #eee;
+    /*利用shadow充当border*/
     box-shadow: 0rpx 0rpx 6rpx black inset;
+}
+.timeline_container .timeline_body .timeline_event{
+    width: 650rpx;
+    height: fit-content;
+    background-color: aquamarine;
+}
+
+.timeline_container .timeline_body .timeline_event .gap{
+    width: 100rpx;
+    height: 100rpx;
+    background-color: balck;
 }

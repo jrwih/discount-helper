@@ -2,23 +2,34 @@
 
 <wxs src="./timeline.wxs" module="wxs"/>
 <view class="page_body">
-    <scroll-view class="timeline_container" scroll-x="1">
+    <view class="timeline_container">
         <scroll-view class="timeline_header" scroll-x="1">
+            <!--重复渲染7个日期date-->
             <block wx:for="{{[0,1,2,3,4,5,6]}}" wx:key="*this" wx:for-item="i">
-                <view class="date" hover-class="hover" hover-stay-time="100"
-                 id="date{{i}}" data-i-Date="{{i}}" bind:tap="{{wxs.tapDate}}">
-                    <view class="day">{{Month[i]}}-{{Day[i]}}</view>
-                    <view class="week">{{Week[i]}}</view>
+                <view class="timeline_date" hover-class="hover" hover-stay-time="100"
+                 id="timeline_date{{i}}" data-i-Date="{{i}}" bind:tap="{{wxs.tapDate}}">
+                    <view class="timeline_day">{{Month[i]}}-{{Day[i]}}</view>
+                    <!--为了视觉效果频繁变动week的背景，在wxs中频繁引用-->
+                    <view class="timeline_week">{{Week[i]}}</view>
                 </view>
             </block>
         </scroll-view>
-        <swiper class="timeline_body" easing-function="easeInCubic" duration="150" current="{{swiperCurrent}}"
-         bind:change="{{wxs.changeSwiper}}">
-            <block wx:for="{{[0,1,2,3,4,5,6]}}" wx:key="*this" wx:for-item="i">
-                <swiper-item >
-                    <view>test{{i}}</view>
+        <swiper class="timeline_body" easing-function="easeInCubic" duration="150" 
+         current="{{swiperCurrent}}" bind:change="{{wxs.changeSwiper}}">
+            <!--重复渲染7个活动表swiper-item-->
+            <block wx:for="{{[0,1,2,3,4,5,6]}}" wx:key="*this">
+                <!--通过flex-direction设置主轴方向为column，然后通过align-items设置副轴居中而达到水平居中-->
+                <swiper-item class="timeline_swiper-item">
+                  <!--for循环重复渲染eventList中的各项活动-->
+                    <block wx:for="{{eventList}}" wx:key="*this" wx:for-index="eventid">
+                      <!--if判断活动在当前日期是否进行渲染-->
+                        <view class="timeline_event" wx:if="1">
+                            <view class="gap"/>
+                            {{eventList[eventid]}}
+                        </view>
+                    </block>
                 </swiper-item>
             </block>
         </swiper>
-    </scroll-view>
+    </view>
 </view>

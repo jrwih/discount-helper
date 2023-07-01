@@ -3,22 +3,18 @@ data-element-type ，最终会呈现为 event.currentTarget.dataset.elementType 
 data-elementType ，最终会呈现为 event.currentTarget.dataset.elementtype 。 */
 
 
+var newDate = lastDate = 0;
 /**监听上方日期栏事件，点击时修改背景颜色，并将上一次修改还原 
  * 还需要同步swiper状态
 */
-var newDate = lastDate = 0;
 function tapDate(event,ins){
-  var data = {
-    /**date编号，0~6 */
-    iDate: event.currentTarget.dataset.iDate,
-  }
   lastDate = newDate;
-  newDate = data.iDate;
+  newDate = event.currentTarget.dataset.iDate;
   /**将上一次选择的日期背景改为none，再修改这一次的日期背景 */
-  ins.selectComponent('#date'+ lastDate +' .week').setStyle({
+  ins.selectComponent('#timeline_date'+ lastDate +' .timeline_week').setStyle({
     "background-color" : 'rgba(0,0,0,0)',
   })
-  ins.selectComponent('#date'+ newDate +' .week').setStyle({
+  ins.selectComponent('#timeline_date'+ newDate +' .timeline_week').setStyle({
     "background-color" : '#87ceeb',
   })
   /**wxs调用的callMethod函数，用于同步header与swiper状态 */
@@ -27,11 +23,17 @@ function tapDate(event,ins){
   /**  console.log(JSON.stringify(event)); */
 }
 
+/**监听下方活动栏事件，change时同步改变日期栏 */
 function changeSwiper(event,ins){
-    console.log(JSON.stringify(event));
-    var state = event.getState();
-    var current = state.current;
-    console.log(current);    
+    lastDate = newDate;
+    newDate = event.detail.current;
+    /**将上一次选择的日期背景改为none，再修改这一次的日期背景 */
+    ins.selectComponent('#timeline_date'+ lastDate +' .timeline_week').setStyle({
+        "background-color" : 'rgba(0,0,0,0)',
+    })
+    ins.selectComponent('#timeline_date'+ newDate +' .timeline_week').setStyle({
+        "background-color" : '#87ceeb',
+    })
 }
 
 module.exports = {
