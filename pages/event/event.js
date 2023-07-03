@@ -20,13 +20,21 @@ class myEvent{
         this.time = eventTime;
     }
 }
-var allEventDetail = getApp().globalData.allEventDetail;
+/**直接在event中维护详细信息，之后在app.js中测试其他数据 */
+var allEventDetail = [
+    /**品牌名，活动名，logo建议放在/static/images/logo/中，某天，每周几，每月几，具体时间 */
+    ['KFC','疯狂星期四','/static/images/logo/Kfc_logo.png',0,4,0,'10:00'],
+    ['McDonalds','麦当劳会员日','/static/images/logo/McDonalds-logo.png',0,[0,6],0,"10:30"]
+]
+/**将event详细信息转换为event对象 */
 function allEventList(allEvent){
     for(var i = 0;i< allEventDetail.length;i++){
         allEvent[i] = new myEvent(allEventDetail[i][0],allEventDetail[i][1],allEventDetail[i][2],allEventDetail[i][3],allEventDetail[i][4],allEventDetail[i][5],allEventDetail[i][6],)
     }
     return allEvent;
 }
+
+
 
 module .exports = {
     allEventList : allEventList,
