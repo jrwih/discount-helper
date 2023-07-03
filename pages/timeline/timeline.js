@@ -45,7 +45,7 @@ class myEvent{
         this.time = eventTime;
     }
 }
-var aED = new Array(0);/**allEventDetail所有活动的字符串数据 */
+var aED = new Array(0);/**allEventDetail所有活动的字符串数据，其中元素不能为空 */
 /**可用于自定义的活动详情 */
 var ED = new Array(
     'brand',//品牌名
