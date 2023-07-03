@@ -34,8 +34,24 @@ function allEventList(allEvent){
     return allEvent;
 }
 
-
+/**对allEvent进行遍历筛选，符合条件的列入对应的每日daylist,再将daylist合并为每周weeklist，适用于周期较短的情况，
+ * 设O(allEvent)=m,O(period)=n，即m个活动，时间周期为n，则复杂度为O=m*n,
+ * 若将活动插入weeklist，则只需要遍历一次allEvent，复杂度O=m
+ */
+function setDayList(allEvent,dayDetail){
+    var dayList = new Array();
+    for(var i=0;i<allEvent.length;i++){
+        /**对于每个活动，判断在当天是否有活动。 */
+    }
+    return dayList;
+}
+function setWeekList(allEvent,weekDetail){
+    var weekList = new Array();
+    return weekList;
+}
 
 module .exports = {
     allEventList : allEventList,
+    setEventList : setDayList,
+    setWeekList : setWeekList,
 }

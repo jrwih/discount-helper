@@ -19,7 +19,7 @@ function tapDate(event,ins){
   })
   /**wxs调用的callMethod函数，用于同步header与swiper状态 */
   ins.callMethod('syncSwiper',newDate);
-  return false;
+  return 0;
   /**  console.log(JSON.stringify(event)); */
 }
 
@@ -35,6 +35,7 @@ function changeSwiper(event,ins){
     ins.selectComponent('#timeline_date'+ newDate +' .timeline_week').setStyle({
         "background-color" : '#87ceeb',
     })
+    return 0;
 }
 
 module.exports = {

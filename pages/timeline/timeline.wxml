@@ -10,7 +10,7 @@
                  id="timeline_date{{dateid}}" data-i-Date="{{dateid}}" bind:tap="{{wxs.tapDate}}">
                     <view class="timeline_day">{{Month[dateid]}}-{{Day[dateid]}}</view>
                     <!--为了视觉效果频繁变动week的背景，在wxs中频繁引用-->
-                    <view class="timeline_week">{{Week[dateid]}}</view>
+                    <view class="timeline_week">{{Week_CHS[dateid]}}</view>
                 </view>
             </block>
         </scroll-view>
