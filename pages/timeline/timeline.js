@@ -14,41 +14,41 @@ var weekList = new Array(6);
 var dayList = new Array();
 /**class用于处理自定义长度的日期数据 */
 class myDateList{
-    constructor(nowDate,amount){
+    constructor(nowDate,period){
         this.nowDate = nowDate;
-        this.amount = amount;
+        this.period = period;
         /**Date记录一周的Date数据 */
-        this.myDate = new Array(this.amount);
-        this.time = this.nowDate.getTime();
+        this.myDate = new Array(this.period);
+        this.time = nowDate.getTime();
     }
     setDate(){
-        for(var i=0;i<this.amount;i++){
+        for(var i=0;i<this.period;i++){
             this.myDate[i] = new Date(0);
-            /**24*60*60*1000=86400000 为一天时间 */
+            /**24*60*60*1000=86400000 为一天时间 */ 
             this.myDate[i].setTime(this.time + i*86400000);
         }
         return this.myDate;
     }
     setDay(){
-        for(var i=0;i<this.amount;i++){
+        for(var i=0;i<this.period;i++){
             Day[i] = this.myDate[i].getDate();
         }
         return Day;
     }
     setWeek(){
-        for(var i=0;i<this.amount;i++){
+        for(var i=0;i<this.period;i++){
             Week[i] = this.myDate[i].getDay();
         }
         return Week;
     }
     setWeek_CHS(){
-        for(var i=0;i<this.amount;i++){
+        for(var i=0;i<this.period;i++){
             Week_CHS[i] = WeekString.charAt(this.myDate[i].getDay());
         }
         return Week_CHS;
     }
     setMonth(){
-        for(var i=0;i<this.amount;i++){
+        for(var i=0;i<this.period;i++){
             Month[i] = this.myDate[i].getMonth()+1;
         }
         return Month;
@@ -78,7 +78,7 @@ Page({
       /**init */
       let init = new function(){
         /**初始化日期数据 */
-        let initWeek = new function(){
+        let initDateList = new function(){
             let myWeek = new myDateList(new Date(),7);
             DateDetail = myWeek.setDate();//Date保留词所以命名为DateDetail
             Day = myWeek.setDay();
@@ -90,15 +90,12 @@ Page({
         /**初始化活动数据，测试中 */
         let initEventList = new function(){
             /**从evnet.js导入数据，allEvent记录所有活动数据，*/
-            var utilEvent = require('../event/event.js');
+            var utilEvent = require('../../event/event.js');
             var allEvent = new Array(0);
             allEvent = utilEvent.allEventList(allEvent);
             /**weekList为一周的总表，而dateList为单日的活动表
              * 需要一个函数来选择符合时间日期的活动加入dateList */
-            weekList = utilEvent.setWeekList(allEvent,DateDetail);
-            dayList[0] = allEvent[0];
-            dayList[1] = allEvent[1];
-            weekList[0] = dayList;
+            weekList = utilEvent.setPeriodList(allEvent,DateDetail);
         }
       }
       /**设置Data中的数据 */
