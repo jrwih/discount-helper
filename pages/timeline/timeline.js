@@ -86,7 +86,6 @@ Page({
             Week_CHS = myWeek.setWeek_CHS();
             Month = myWeek.setMonth();
         }
-        
         /**初始化活动数据 */
         let initEventList = new function(){
             /**从evnet.js导入数据，allEvent记录所有活动数据，*/

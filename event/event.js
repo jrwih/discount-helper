@@ -14,7 +14,7 @@ class myEvent{
          * weekly每周，类型为Array[0,1,2,3,4,5,6]，0为周日，
          * monthly每月，类型为Array[1~31]，注意边界问题
          * 时间为0时不在时间轴上显示具体时间 */
-        if(eventDate!=0){this.date = Date(eventDate);}
+        if(eventDate!=0){this.date = new Date(eventDate);}
         else{this.date = 0;}
         this.weekly = eventWeekly;
         this.monthly = eventMonthly;
@@ -23,9 +23,11 @@ class myEvent{
 }
 /**直接在event中维护详细信息，之后在app.js中测试其他数据 */
 var allEventDetail = [
-    /**品牌名，活动名，logo建议放在/static/images/logo/中，某天，每周几，每月几，具体时间 */
-    ['KFC','疯狂星期四','/static/images/logo/Kfc_logo.png',0,[4],0,'10:00'],
-    ['McDonalds','麦当劳会员日','/static/images/logo/McDonalds-logo.png',0,[0,6],0,"10:30"]
+    /**品牌名，活动名，logo建议放在/static/images/logo/中，某天'2023,7,4'，每周几，每月几，具体时间 */
+    ['StarBucks','测试用例','/static/images/logo/Starbucks-logo.png','2023,7,4',-1,[7],'0'],
+    ['KFC','疯狂星期四','/static/images/logo/KFC-logo.png',0,[4],0,'10:00'],
+    ['McDonalds','麦当劳会员日','/static/images/logo/McDonalds-logo.png',0,[0,1,6],0,'10:30'],
+    ['蜜雪冰城','满12-2元','/static/images/logo/MiXue-logo.png',0,[3],0,'10:00'],
 ]
 /**将event详细信息转换为event对象 */
 function allEventList(allEvent){
@@ -52,14 +54,18 @@ function setDayList(allEvent,dayDetail){
         }
         if(flag){dayList.push(allEvent[i]);}
         else{
-            for(var j=0;j<allEvent[i].monthly.length;j++){
-                if(allEvent[i].monthly[j] == dayDetail.getMonth()+1){flag = 1}
+            for(j=0;j<allEvent[i].monthly.length;j++){
+                if(allEvent[i].monthly[j] == dayDetail.getDate()){flag = 1}
             }
             if(flag){dayList.push(allEvent[i]);}
             else{
-                /**当event.date非空，且getDate()日期相同才加入数组 */
-                if(allEvent[i].date!=0
-                   &&allEvent[i].date.getDate()==dayDetail.getDate()){flag = 1}
+                /**当event.date非空，且getDate()日期、getMonth()月份都相同才加入数组 */
+                if(allEvent[i].date!=0){
+                    if(allEvent[i].date.getDate()==dayDetail.getDate()
+                       &&allEvent[i].date.getMonth()==dayDetail.getMonth()){
+                        {flag = 1} 
+                    }
+                }
                 if(flag){dayList.push(allEvent[i]);}
                 else continue;
             }

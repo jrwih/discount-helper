@@ -24,7 +24,7 @@
                         <view class="timeline_event">
                             <view class="gap"/>
                             <view class="time">{{List[dateid][eventid].time}}</view>
-                            <image class="logo" src="{{List[dateid][eventid].logo}}"></image>
+                            <image class="logo" src="{{List[dateid][eventid].logo}}" mode="aspectFit"></image>
                             <view class="event">
                                 <view class="brandname">{{List[dateid][eventid].brandname}}</view>
                                 <view class="eventname">{{List[dateid][eventid].eventname}}</view>
