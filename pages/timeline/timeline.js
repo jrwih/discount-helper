@@ -87,7 +87,7 @@ Page({
             Month = myWeek.setMonth();
         }
         
-        /**初始化活动数据，测试中 */
+        /**初始化活动数据 */
         let initEventList = new function(){
             /**从evnet.js导入数据，allEvent记录所有活动数据，*/
             var utilEvent = require('../../event/event.js');

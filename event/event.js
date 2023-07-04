@@ -65,6 +65,13 @@ function setDayList(allEvent,dayDetail){
             }
         }
     }
+    /**对dayList按活动时间time进行排序
+     * time="10:30",time.split(":")="10,30",Number(time.split(":")[0])=10
+     */
+    dayList.sort(function(a,b){
+        return((Number(a.time.split(":")[0])*60 + Number(a.time.split(":")[1]))
+                - (Number(b.time.split(":")[0])*60 + Number(b.time.split(":")[1])) )
+    })
     return dayList;
 }
 function setPeriodList(allEvent,periodDetail){
