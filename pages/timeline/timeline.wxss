@@ -77,12 +77,21 @@
     border-left: #bbb solid;
     border-width: thin;
 }
+.timeline_event .timeHidden{
+    font-size: 28rpx;
+    font-weight: normal;
+    color: rgba(0,0,0,0);
+    border-left: #bbb solid;
+    border-width: thin;
+}
 .timeline_event .logo{
     /*logo比例尽量保持在16:9*/
-    width: 320rpx;
-    height: 180rpx;
+    width: 288rpx;
+    height: 162rpx;
+    border-left: rgba(0,0,0,0) 16rpx solid;
+    border-right: rgba(0,0,0,0) 16rpx solid;
 }
 .timeline_event .event{
     width: 240rpx;
-    font-size: 40rpx;
+    font-size: 36rpx;
 }

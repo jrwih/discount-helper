@@ -23,7 +23,11 @@
                     <block wx:for="{{List[dateid]}}" wx:key="*this" wx:for-index="eventid">
                         <view class="timeline_event">
                             <view class="gap"/>
-                            <view class="time">{{List[dateid][eventid].time}}</view>
+                            <block>
+                                <!--时间为0时隐藏，与前一时间相同时隐藏，由event.timeflag指示，在排序后确定-->
+                                <view class="time" wx:if="{{List[dateid][eventid].timeflag}}">{{List[dateid][eventid].time}}</view>
+                                <view class="timeHidden" wx:else="{{List[dateid][eventid].timeflag}}">{{List[dateid][eventid].time}}</view>
+                            </block>
                             <image class="logo" src="{{List[dateid][eventid].logo}}" mode="aspectFit"></image>
                             <view class="event">
                                 <view class="brandname">{{List[dateid][eventid].brandname}}</view>

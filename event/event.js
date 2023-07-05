@@ -19,15 +19,20 @@ class myEvent{
         this.weekly = eventWeekly;
         this.monthly = eventMonthly;
         this.time = eventTime;
+        /**flag用于指示时间是否显示 */
+        this.timeflag = 1;
     }
 }
 /**直接在event中维护详细信息，之后在app.js中测试其他数据 */
 var allEventDetail = [
     /**品牌名，活动名，logo建议放在/static/images/logo/中，某天'2023,7,4'，每周几，每月几，具体时间 */
-    ['StarBucks','测试用例','/static/images/logo/Starbucks-logo.png','2023,7,4',-1,[7],'0'],
+    ['StarBucks','测试用例','/static/images/logo/Starbucks-logo.png','2023,7,4',-1,[7],'00:00'],
     ['KFC','疯狂星期四','/static/images/logo/KFC-logo.png',0,[4],0,'10:00'],
     ['McDonalds','麦当劳会员日','/static/images/logo/McDonalds-logo.png',0,[0,1,6],0,'10:30'],
     ['蜜雪冰城','满12-2元','/static/images/logo/MiXue-logo.png',0,[3],0,'10:00'],
+    ['华莱士','全场6元','/static/images/logo/Wallace.png',0,-1,[6,16,26],'10:00'],
+    ['饿了么','抢18元红包','/static/images/logo/Eleme.png',0,[0,6],[18],'00:00'],
+    ['美团','抢18元红包','/static/images/logo/Meituan.png',0,[0,6],[18],'00:00'],
 ]
 /**将event详细信息转换为event对象 */
 function allEventList(allEvent){
@@ -71,13 +76,34 @@ function setDayList(allEvent,dayDetail){
             }
         }
     }
-    /**对dayList按活动时间time进行排序
-     * time="10:30",time.split(":")="10,30",Number(time.split(":")[0])=10
-     */
+    return sortDayList(dayList);
+}
+/**对dayList按活动时间time进行排序
+ * time="10:30",time.split(":")="10,30",Number(time.split(":")[0])=10
+ */
+function sortDayList(dayList){
     dayList.sort(function(a,b){
         return((Number(a.time.split(":")[0])*60 + Number(a.time.split(":")[1]))
                 - (Number(b.time.split(":")[0])*60 + Number(b.time.split(":")[1])) )
     })
+    return setTimeFlag(dayList);
+}
+/**对排序后的dayList中的Event进行timeflag设置，时间为0时隐藏，与前一时间相同时隐藏 */
+function setTimeFlag(dayList){
+    /**JS中变量本身没有类型，只有值有类型，因此无法直接访问其中的内容,创建temp用于存储myEvent后的list */
+    var temp = new Array();
+    //if(dayList[0].time=='00:00'){dayList[0].timeflag = 0};
+    for(var i=0;i<dayList.length;i++){
+        /** 先初始化类型变量，再通过引用赋值，然后可以访问类成员变量。离开for循环后又会失效。
+         *  Lesson5,绕远路才是我的捷径！真是饶了好大一圈啊，谢谢你，杰洛。*/
+        temp[i] = new myEvent();
+        temp[i] = dayList[i];
+        /**为了防止边界问题，先处理0==i的情况*/
+        if(0==i){
+            if('00:00'==temp[i].time){temp[i].timeflag=0;}
+        }
+        else if(temp[i-1].time==temp[i].time){temp[i].timeflag=0;}
+    }
     return dayList;
 }
 function setPeriodList(allEvent,periodDetail){
