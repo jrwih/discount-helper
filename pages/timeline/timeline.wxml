@@ -21,6 +21,7 @@
                 <swiper-item class="timeline_swiper_item">
                     <!--for循环重复渲染eventList中的各项活动，输入list确定渲染哪些活动-->
                     <block wx:for="{{List[dateid]}}" wx:key="*this" wx:for-index="eventid">
+                    <mp-slideview buttons="{{slidebuttons}}" icon="{{true}}">
                         <view class="timeline_event">
                             <view class="gap"/>
                             <block>
@@ -34,9 +35,19 @@
                                 <view class="eventname">{{List[dateid][eventid].eventname}}</view>
                             </view>
                         </view>
+                    </mp-slideview>
                     </block>
+                    <view class="addEvent">
+                        <image src="/static/weui/outlined/add.svg" mode="aspectFit" 
+                        style="width: 60rpx;height: 60rpx;"/>
+                    </view>
                 </swiper-item>
             </block>
         </swiper>
     </view>
+    <page-container show="{{show}}" position="right" custom-style="width=50vh">
+        <view class="eventPage">
+            <button type="default" bind:tap="exitEventPage">返回</button>
+        </view>
+    </page-container>
 </view>

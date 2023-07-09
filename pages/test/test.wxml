@@ -6,7 +6,8 @@
     <view>乙</view>
     <view>丙</view>
     <view>丁</view>
-    <root-portal>
-        <view class="mask"></view>
-    </root-portal>
 </scroll-view>
+<mp-slideview buttons="{{slidebuttons}}" icon="{{true}}">111</mp-slideview>
+<!--<root-portal>
+        <view class="mask"></view>
+    </root-portal>-->

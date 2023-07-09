@@ -64,11 +64,21 @@ Page({
      * List传输活动列表
      */
     data: {
+        show : 0,
         Month : [0],
         Week : [0],
         Day : [0],
         swiperCurrent : 0,
         List:[],
+        eventCurrent: 0,
+
+        slidebuttons: [{
+            text: "订阅",src:"/static/weui/outlined/like.svg"
+        },{
+            text: "编辑",src:"/static/weui/outlined/add.svg"
+        },{
+            text: "删除",src:"/static/weui/outlined/delete.svg"
+        }],
     },
 
     /**
@@ -108,6 +118,17 @@ Page({
       /**test */
 
       /**test */
+    },
+
+    showEventPage(e){
+        this.setData({
+            eventCurrent: e.currentTarget.dataset.iEvent,
+            show: true
+        })
+    },
+    exitEventPage(){
+        this.setData({show: false})
+        // wx.navigateBack()
     },
 
     /**
