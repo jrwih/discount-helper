@@ -5,39 +5,48 @@
  */
 
 class myEvent{
-    constructor(brandname,eventName,eventLogo,eventDate,eventWeekly,eventMonthly,eventTime){
-        this.brandname = brandname
-        this.eventname = eventName;
-        this.logo = eventLogo;
-        /**活动日期：
+    constructor(id,brandname,eventName,eventLogo,eventDate,eventWeekly,eventMonthly,eventTime){
+        /**以下为基础信息活动日期：
          * date特定某天，类型为Date(year,month,day)或0，
          * weekly每周，类型为Array[0,1,2,3,4,5,6]，0为周日，
          * monthly每月，类型为Array[1~31]，注意边界问题
          * 时间为0时不在时间轴上显示具体时间 */
+        this.id = id;
+        this.brandname = brandname;
+        this.eventname = eventName;
+        this.logo = eventLogo;
         if(eventDate!=0){this.date = new Date(eventDate);}
         else{this.date = 0;}
         this.weekly = eventWeekly;
         this.monthly = eventMonthly;
         this.time = eventTime;
-        /**flag用于指示时间是否显示 */
+        /**以下为逻辑信息，
+         * flag用于指示时间是否显示 */
         this.timeflag = 1;
+        this.slideButtons = [{
+            text: "订阅",src:"/static/weui/outlined/like.svg"
+        },{
+            text: "编辑",src:"/static/weui/outlined/add.svg"
+        },{
+            text: "删除",src:"/static/weui/outlined/delete.svg"
+        }];
     }
 }
 /**直接在event中维护详细信息，之后在app.js中测试其他数据 */
 var allEventDetail = [
     /**品牌名，活动名，logo建议放在/static/images/logo/中，某天'2023,7,4'，每周几，每月几，具体时间 */
-    ['StarBucks','测试用例','/static/images/logo/Starbucks-logo.png','2023,7,4',-1,[7],'00:00'],
-    ['KFC','疯狂星期四','/static/images/logo/KFC-logo.png',0,[4],0,'10:00'],
-    ['McDonalds','麦当劳会员日','/static/images/logo/McDonalds-logo.png',0,[0,1,6],0,'10:30'],
-    ['蜜雪冰城','满12-2元','/static/images/logo/MiXue-logo.png',0,[3],0,'10:00'],
-    ['华莱士','全场6元','/static/images/logo/Wallace.png',0,-1,[6,16,26],'10:00'],
-    ['饿了么','抢18元红包','/static/images/logo/Eleme.png',0,[0,6],[18],'00:00'],
-    ['美团','抢18元红包','/static/images/logo/Meituan.png',0,[0,6],[18],'00:00'],
+    [0,'StarBucks','测试用例','/static/images/logo/Starbucks-logo.png','2023,7,4',-1,[11,12],'00:00'],
+    [1,'KFC','疯狂星期四','/static/images/logo/KFC-logo.png',0,[4],0,'10:00'],
+    [2,'McDonalds','麦当劳会员日','/static/images/logo/McDonalds-logo.png',0,[0,1,6],0,'10:30'],
+    [3,'蜜雪冰城','满12-2元','/static/images/logo/MiXue-logo.png',0,[3],0,'10:00'],
+    [4,'华莱士','全场6元','/static/images/logo/Wallace.png',0,-1,[6,16,26],'10:00'],
+    [5,'饿了么','抢18元红包','/static/images/logo/Eleme.png',0,[0,6],[18],'00:00'],
+    [6,'美团','抢18元红包','/static/images/logo/Meituan.png',0,[0,6],[18],'00:00'],
 ]
 /**将event详细信息转换为event对象 */
 function allEventList(allEvent){
     for(var i = 0;i< allEventDetail.length;i++){
-        allEvent[i] = new myEvent(allEventDetail[i][0],allEventDetail[i][1],allEventDetail[i][2],allEventDetail[i][3],allEventDetail[i][4],allEventDetail[i][5],allEventDetail[i][6],)
+        allEvent[i] = new myEvent(allEventDetail[i][0],allEventDetail[i][1],allEventDetail[i][2],allEventDetail[i][3],allEventDetail[i][4],allEventDetail[i][5],allEventDetail[i][6],allEventDetail[i][7])
     }
     return allEvent;
 }
@@ -114,6 +123,7 @@ function setPeriodList(allEvent,periodDetail){
     }
     return periodList;
 }
+
 
 module .exports = {
     allEventList : allEventList,

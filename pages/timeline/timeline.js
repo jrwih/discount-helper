@@ -1,5 +1,6 @@
 // pages/timeline/timeline.js
 
+var utilEvent = require('../../event/event.js');
 /**Month记录月份数据，Week记录星期数据，Day记录日期数据，Daily记录Date数据*/
 var Month = new Array();
 var Week = new Array();
@@ -9,9 +10,9 @@ var WeekString = new String("日一二三四五六");
 var Week_CHS = new Array();
 
 /**weekList为一周的总表，调用event.js中setWeekList设置，并由this.setData向Data中的List输入数据
- * 而dayList为单日的活动表，可以单独调用event.js中setDayList设置 */
+ * allEvent为所有活动的内容，可以单独调用event.js中setDayList设置 */
+var allEvent = new Array(0);
 var weekList = new Array(6);
-var dayList = new Array();
 /**class用于处理自定义长度的日期数据 */
 class myDateList{
     constructor(nowDate,period){
@@ -55,6 +56,14 @@ class myDateList{
     }
 }
 
+var slideButtons =[{
+    text: "订阅",src:"/static/weui/outlined/like.svg",data:"0"
+},{
+    text: "编辑",src:"/static/weui/outlined/add.svg"
+},{
+    text: "删除",src:"/static/weui/outlined/delete.svg"
+}]
+
 
 Page({
 
@@ -64,21 +73,13 @@ Page({
      * List传输活动列表
      */
     data: {
-        show : 0,
+        pageShow : 0,
         Month : [0],
         Week : [0],
         Day : [0],
+        eventList : [],
+        eventCurrent : 0,
         swiperCurrent : 0,
-        List:[],
-        eventCurrent: 0,
-
-        slidebuttons: [{
-            text: "订阅",src:"/static/weui/outlined/like.svg"
-        },{
-            text: "编辑",src:"/static/weui/outlined/add.svg"
-        },{
-            text: "删除",src:"/static/weui/outlined/delete.svg"
-        }],
     },
 
     /**
@@ -99,8 +100,6 @@ Page({
         /**初始化活动数据 */
         let initEventList = new function(){
             /**从evnet.js导入数据，allEvent记录所有活动数据，*/
-            var utilEvent = require('../../event/event.js');
-            var allEvent = new Array(0);
             allEvent = utilEvent.allEventList(allEvent);
             /**weekList为一周的总表，而dateList为单日的活动表
              * 需要一个函数来选择符合时间日期的活动加入dateList */
@@ -113,22 +112,57 @@ Page({
           Week : Week,
           Week_CHS : Week_CHS,
           Day : Day,
-          List : weekList,
+          eventList : weekList,
       });
       /**test */
 
       /**test */
     },
 
-    showEventPage(e){
+    /**更新数据 */
+    refreshEvent(){
+        weekList = utilEvent.setPeriodList(allEvent,DateDetail);
+        this.setData({eventList: weekList});
+    },
+
+    /**按照活动id查找索引 */
+    findIndex(id){
+        var index = -1;
+        for(index = 0;index<allEvent.length;index++){
+            if(allEvent[index].id == id) return index;
+        }
+        return false;
+    },
+
+    showEventPage(index){
         this.setData({
-            eventCurrent: e.currentTarget.dataset.iEvent,
-            show: true
+            eventCurrent: index,
+            pageShow: true,
         })
     },
     exitEventPage(){
-        this.setData({show: false})
+        this.setData({pageShow: false})
         // wx.navigateBack()
+    },
+
+    slideTap(e){
+        var eventIndex = this.findIndex(e.currentTarget.dataset.idEvent);
+        switch(e.detail.index){
+            /**订阅 */
+            case 0:
+                allEvent[eventIndex].slideButtons[0].src="/static/weui/filled/like.svg";
+                this.refreshEvent();
+                break;
+            /**编辑 */
+            case 1:
+                this.showEventPage(eventIndex);
+                break;
+            /**删除 */
+            case 2:
+                allEvent.splice(eventIndex,1);
+                this.refreshEvent();
+                break;
+        }
     },
 
     /**
