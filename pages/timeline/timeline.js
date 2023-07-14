@@ -90,12 +90,13 @@ Page({
             '每周',
             '每月',
         ],
-
+        id: -1,
+        id_new: 100,//自定义活动id从101开始
         brandname: '',
         eventname: '',
-        logo: '',
+        logo: '/static/images/gif001.gif',
         eventtime: '00:00',
-        eventdate: '2023-01-01',
+        eventdate: '2023-00-00',
         eventweekly: [],
         eventmonthly: [],
     },
@@ -163,6 +164,7 @@ Page({
         })
         if(this.data.eventCurrent!=-1){
             this.setData({
+                id: allEvent[index].id,
                 brandname: allEvent[index].brandname,
                 eventname: allEvent[index].eventname,
                 logo: allEvent[index].logo,
@@ -175,9 +177,10 @@ Page({
     },
     resetEventPage(){
         this.setData({
+            id: -1,
             brandname: '',
             eventname: '',
-            logo: '',
+            logo: '/static/images/gif001.gif',
             eventtime: '00:00',
             eventdate: '2023-01-01',
             eventweekly: [],
@@ -185,8 +188,23 @@ Page({
         });
     },
     confirmEventPage(){
+        if(this.data.id!=-1){
+            var index = this.findIndex(this.data.id);
+            allEvent[index].brandname = this.data.brandname;
+            allEvent[index].eventname = this.data.eventname;
+            allEvent[index].logo = this.data.logo;
+            allEvent[index].time = this.data.eventtime;
+            allEvent[index].eventdate = this.data.eventdate;
+            allEvent[index].weekly = this.data.eventweekly;
+            allEvent[index].monthly = this.data.eventmonthly;
+        }
+        else{
+            this.setData({id_new: this.data.id_new+1});
+            allEvent.push(new utilEvent.myEvent(this.data.id_new,this.data.brandname,this.data.eventname,this.data.logo,this.data.eventdate,this.data.eventweekly,this.data.eventmonthly,this.data.eventtime));
+        }
         this.setData({pageShow: false})
         this.resetEventPage();
+        this.refreshEventList();
     },
     exitEventPage(){
         this.setData({pageShow: false})
@@ -236,8 +254,6 @@ Page({
                 this.setData({eventweekly: e.detail.value});
                 break;
         }
-        var str = this.data.brandname;
-        console.log(str);
     },
 
     /**

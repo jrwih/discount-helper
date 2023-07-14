@@ -146,6 +146,7 @@ function setTimeFlag(dayList){
             if('00:00'==temp[i].time){temp[i].timeflag=0;}
         }
         else if(temp[i-1].time==temp[i].time){temp[i].timeflag=0;}
+        else temp[i].timeflag=1;
     }
     return dayList;
 }
@@ -165,4 +166,5 @@ module .exports = {
     setPeriodList : setPeriodList,
     transData : transData,
     transEvent : transEvent,
+    myEvent : myEvent,
 }
