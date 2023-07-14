@@ -96,10 +96,8 @@ Page({
         logo: '',
         eventtime: '00:00',
         eventdate: '2023-01-01',
-        eventweekly: ['7'],
-        weekitems: [{name: '0',value: '周日'},{name: '1',value: '周一'},{name: '2',value: '周二'},{name: '3',value: '周三'},{name: '4',value: '周四'},{name: '5',value: '周五'},{name: '6',value:'周六'},{name: '7',value:'无'}],
-        eventmonthly: ['0'],
-        monthitems:[{name: '0',value: '无'},],
+        eventweekly: [],
+        eventmonthly: [],
     },
 
     /**
@@ -144,7 +142,7 @@ Page({
     },
     
     /**更新数据 */
-    refreshEvent(){
+    refreshEventList(){
         weekList = utilEvent.setPeriodList(allEvent,DateDetail);
         this.setData({eventList: weekList});
     },
@@ -163,9 +161,36 @@ Page({
             eventCurrent: (index==null?-1:index),
             pageShow: true,
         })
+        if(this.data.eventCurrent!=-1){
+            this.setData({
+                brandname: allEvent[index].brandname,
+                eventname: allEvent[index].eventname,
+                logo: allEvent[index].logo,
+                eventtime: allEvent[index].time,
+                eventdate: allEvent[index].eventdate,
+                eventweekly: allEvent[index].weekly,
+                eventmonthly: allEvent[index].monthly,
+            })
+        }
+    },
+    resetEventPage(){
+        this.setData({
+            brandname: '',
+            eventname: '',
+            logo: '',
+            eventtime: '00:00',
+            eventdate: '2023-01-01',
+            eventweekly: [],
+            eventmonthly: [],
+        });
+    },
+    confirmEventPage(){
+        this.setData({pageShow: false})
+        this.resetEventPage();
     },
     exitEventPage(){
         this.setData({pageShow: false})
+        this.resetEventPage();
         // wx.navigateBack()
     },
 
@@ -175,7 +200,7 @@ Page({
             /**订阅 */
             case 0:
                 allEvent[eventIndex].slideButtons[0].src="/static/weui/filled/like.svg";
-                this.refreshEvent();
+                this.refreshEventList();
                 break;
             /**编辑 */
             case 1:
@@ -184,7 +209,7 @@ Page({
             /**删除 */
             case 2:
                 allEvent.splice(eventIndex,1);
-                this.refreshEvent();
+                this.refreshEventList();
                 break;
         }
     },

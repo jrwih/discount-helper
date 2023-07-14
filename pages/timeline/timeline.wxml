@@ -52,7 +52,9 @@
                 <view class="weui-cell weui-cell_active">
                 <view class="weui-cell_hd"><view class="weui-label">{{inputInfoList[inputid]}}</view></view>
                 <view class="weui-cell_bd">
-                    <input wx:if="{{inputid<3}}" class="weui-input" type="text" placeholder="请输入{{inputInfoList[inputid]}}" bind:confirm="inputContent" data-content="{{inputid}}"/>
+                    <input wx:if="{{inputid==0}}" class="weui-input" type="text" value="{{brandname}}" placeholder="请输入{{inputInfoList[inputid]}}" bind:confirm="inputContent" data-content="{{inputid}}"/>
+                    <input wx:if="{{inputid==1}}" class="weui-input" type="text" value="{{eventname}}" placeholder="请输入{{inputInfoList[inputid]}}" bind:confirm="inputContent" data-content="{{inputid}}"/>
+                    <input wx:if="{{inputid==2}}" class="weui-input" type="text" value="{{logo}}" placeholder="请输入{{inputInfoList[inputid]}}" bind:confirm="inputContent" data-content="{{inputid}}"/>
                     <picker wx:if="{{inputid==3}}" mode="time" aria-role="combobox" aria-labelledby="js_time" value="{{eventtime}}" start="00:00" end="23:59" bind:change="inputContent" data-content="{{inputid}}">
                         <weui-input>{{eventtime}}</weui-input>
                     </picker>
@@ -65,15 +67,17 @@
                 <view class="weui-cell weui-cell_active">
                 <view class="weui-cell_hd"><view class="weui-label">{{inputInfoList[inputid]}}</view></view>
                 <view class="weui-cell_bd">
-                    <picker wx:if="{{inputid==4}}" mode="date" aria-role="combobox" aria-labelledby="js_date" value="{{eventdate}}" start="2023-01-01" fields="year" bind:change="inputContent" data-content="{{inputid}}">
+                    <picker wx:if="{{inputid==4}}" mode="date" aria-role="combobox" aria-labelledby="js_date" value="{{eventdate}}" bind:change="inputContent" data-content="{{inputid}}">
                         <weui-input>{{eventdate}}</weui-input>
                     </picker>
-                    <multi-selector wx:if="{{inputid==5}}" class="selector" value="{{eventweekly}}" bind:change="inputContent" items="{{weekitems}}" placeholder="请选择每周几" show-value="{{false}}"></multi-selector>
+                    <input wx:if="{{inputid==5}}" class="weui-input" type="text" value="{{eventweekly}}" placeholder="请输入0~6，0为周日" bind:confirm="inputContent" data-content="{{inputid}}"/>
+                    <input wx:if="{{inputid==6}}" class="weui-input" type="text" value="{{eventmonthly}}" placeholder="请输入1~31" bind:confirm="inputContent" data-content="{{inputid}}"/>
                 </view>
                 </view>
             </block>
             </mp-cells>
-            <button type="default" bind:tap="exitEventPage">返回</button>
         </mp-form-page>
+        <view class="weui-btn weui-btn_primary" aria-role="button" bind:tap="confirmEventPage">确定</view>
+        <view class="weui-btn weui-btn_default" aria-role="button" bind:tap="exitEventPage">返回</view>
     </page-container>
 </view>
