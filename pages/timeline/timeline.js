@@ -80,6 +80,26 @@ Page({
         eventList : [],
         eventCurrent : 0,
         swiperCurrent : 0,
+
+        inputInfoList: [
+            '品牌名',
+            '活动名',
+            'logo',
+            '时间',
+            '某天',
+            '每周',
+            '每月',
+        ],
+
+        brandname: '',
+        eventname: '',
+        logo: '',
+        eventtime: '00:00',
+        eventdate: '2023-01-01',
+        eventweekly: ['7'],
+        weekitems: [{name: '0',value: '周日'},{name: '1',value: '周一'},{name: '2',value: '周二'},{name: '3',value: '周三'},{name: '4',value: '周四'},{name: '5',value: '周五'},{name: '6',value:'周六'},{name: '7',value:'无'}],
+        eventmonthly: ['0'],
+        monthitems:[{name: '0',value: '无'},],
     },
 
     /**
@@ -119,6 +139,10 @@ Page({
       /**test */
     },
 
+    methods:{
+
+    },
+    
     /**更新数据 */
     refreshEvent(){
         weekList = utilEvent.setPeriodList(allEvent,DateDetail);
@@ -134,9 +158,9 @@ Page({
         return false;
     },
 
-    showEventPage(index){
+    showEventPage(e,index){
         this.setData({
-            eventCurrent: index,
+            eventCurrent: (index==null?-1:index),
             pageShow: true,
         })
     },
@@ -155,7 +179,7 @@ Page({
                 break;
             /**编辑 */
             case 1:
-                this.showEventPage(eventIndex);
+                this.showEventPage(e,eventIndex);
                 break;
             /**删除 */
             case 2:
@@ -163,6 +187,32 @@ Page({
                 this.refreshEvent();
                 break;
         }
+    },
+
+    /**表单内容 */
+    inputContent(e){
+        switch(e.currentTarget.dataset.content){
+            case 0:
+                this.setData({brandname: e.detail.value});
+                break;
+            case 1:
+                this.setData({eventname: e.detail.value});
+                break;
+            case 2:
+                this.setData({logo: e.detail.value});
+                break;
+            case 3:
+                this.setData({eventtime: e.detail.value});
+                break;
+            case 4:
+                this.setData({eventdate: e.detail.value});
+                break;
+            case 5:
+                this.setData({eventweekly: e.detail.value});
+                break;
+        }
+        var str = this.data.brandname;
+        console.log(str);
     },
 
     /**

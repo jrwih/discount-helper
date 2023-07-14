@@ -32,23 +32,57 @@ class myEvent{
         }];
     }
 }
-/**直接在event中维护详细信息，之后在app.js中测试其他数据 */
-var allEventDetail = [
-    /**品牌名，活动名，logo建议放在/static/images/logo/中，某天'2023,7,4'，每周几，每月几，具体时间 */
-    [0,'StarBucks','测试用例','/static/images/logo/Starbucks-logo.png','2023,7,4',-1,[11,12],'00:00'],
-    [1,'KFC','疯狂星期四','/static/images/logo/KFC-logo.png',0,[4],0,'10:00'],
-    [2,'McDonalds','麦当劳会员日','/static/images/logo/McDonalds-logo.png',0,[0,1,6],0,'10:30'],
-    [3,'蜜雪冰城','满12-2元','/static/images/logo/MiXue-logo.png',0,[3],0,'10:00'],
-    [4,'华莱士','全场6元','/static/images/logo/Wallace.png',0,-1,[6,16,26],'10:00'],
-    [5,'饿了么','抢18元红包','/static/images/logo/Eleme.png',0,[0,6],[18],'00:00'],
-    [6,'美团','抢18元红包','/static/images/logo/Meituan.png',0,[0,6],[18],'00:00'],
-]
-/**将event详细信息转换为event对象 */
+
+/**小程序初始化时，调用该函数初始化allEvent数组，将event详细信息转换为event对象 */
 function allEventList(allEvent){
-    for(var i = 0;i< allEventDetail.length;i++){
-        allEvent[i] = new myEvent(allEventDetail[i][0],allEventDetail[i][1],allEventDetail[i][2],allEventDetail[i][3],allEventDetail[i][4],allEventDetail[i][5],allEventDetail[i][6],allEventDetail[i][7])
+    /**从缓存中读取文件 */
+    try{
+        var allEventDetail = wx.getStorageSync('0');
+    } catch(e){
+        console.log("读取失败");
     }
-    return allEvent;
+    /**缓存为空时，写入原始数据 */
+    if(allEventDetail==[]){
+        console.log("数据为空");
+        allEventDetail = [
+            /**id,品牌名，活动名，logo建议放在/static/images/logo/中，某天'2023,7,4'，每周几，每月几，具体时间*/
+            [0,'StarBucks','测试用例','/static/images/logo/Starbucks-logo.png','2023,7,4',-1,[11,12],'00:00'],
+            [1,'KFC','疯狂星期四','/static/images/logo/KFC-logo.png',0,[4],0,'10:00'],
+            [2,'McDonalds','麦当劳会员日','/static/images/logo/McDonalds-logo.png',0,[0,1,6],0,'10:30'],
+            [3,'蜜雪冰城','满12-2元','/static/images/logo/MiXue-logo.png',0,[3],0,'10:00'],
+            [4,'华莱士','全场6元','/static/images/logo/Wallace.png',0,-1,[6,16,26],'10:00'],
+            [5,'饿了么','抢18元红包','/static/images/logo/Eleme.png',0,[0,6],[18],'00:00'],
+            [6,'美团','抢18元红包','/static/images/logo/Meituan.png',0,[0,6],[18],'00:00'],
+        ]
+        wx.setStorage({
+            key: '0',
+            data: allEventDetail,
+            success(){
+                console.log("写入成功");
+            },
+            fail(){
+                console.log("写入失败");
+            }
+        })
+    }
+    return transData(allEventDetail, allEvent);
+}
+/**将传入的数据转换为myEvent对象 */
+function transData(eventDetail) {
+    var _allEvent = new Array();
+    for (var i = 0; i < eventDetail.length; i++) {
+        _allEvent[i] = new myEvent(eventDetail[i][0], eventDetail[i][1], eventDetail[i][2], eventDetail[i][3], eventDetail[i][4], eventDetail[i][5], eventDetail[i][6], eventDetail[i][7]);
+    }
+    transEvent(_allEvent);
+    return _allEvent;
+}
+
+function transEvent(allEvent){
+    var _eventDetail = new Array();
+    for(var i =0;i<allEvent.length;i++){
+        _eventDetail[i] = [allEvent[i].id,allEvent[i].brandname,allEvent[i].eventname,allEvent[i].logo,(allEvent[i].date==0?0:String(allEvent[i].date.getFullYear()+','+(allEvent[i].date.getMonth()+1)+','+allEvent[i].date.getDate())),allEvent[i].weekly,allEvent[i].monthly,allEvent[i].time];
+    }
+    return _eventDetail;
 }
 
 /**对allEvent进行遍历筛选，符合条件的列入对应的每日daylist,再将daylist合并为periodlist，适用于周期较短的情况，
@@ -129,4 +163,6 @@ module .exports = {
     allEventList : allEventList,
     setEventList : setDayList,
     setPeriodList : setPeriodList,
+    transData : transData,
+    transEvent : transEvent,
 }

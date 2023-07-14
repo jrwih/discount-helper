@@ -37,7 +37,7 @@
                         </view>
                     </mp-slideview>
                     </block>
-                    <view class="addEvent">
+                    <view class="addEvent" bind:tap="showEventPage" style="position: relative;top: 30rpx;">
                         <image src="/static/weui/outlined/add.svg" mode="aspectFit" 
                         style="width: 60rpx;height: 60rpx;"/>
                     </view>
@@ -46,9 +46,34 @@
         </swiper>
     </view>
     <page-container show="{{pageShow}}" position="right" custom-style="width=50vh">
-        <view class="eventPage">
-            
+        <mp-form-page title="活动">
+            <mp-cells title="活动信息">
+            <block wx:for="{{inputInfoList}}" wx:key="*this" wx:for-index="inputid" wx:if="{{inputid<4}}">
+                <view class="weui-cell weui-cell_active">
+                <view class="weui-cell_hd"><view class="weui-label">{{inputInfoList[inputid]}}</view></view>
+                <view class="weui-cell_bd">
+                    <input wx:if="{{inputid<3}}" class="weui-input" type="text" placeholder="请输入{{inputInfoList[inputid]}}" bind:confirm="inputContent" data-content="{{inputid}}"/>
+                    <picker wx:if="{{inputid==3}}" mode="time" aria-role="combobox" aria-labelledby="js_time" value="{{eventtime}}" start="00:00" end="23:59" bind:change="inputContent" data-content="{{inputid}}">
+                        <weui-input>{{eventtime}}</weui-input>
+                    </picker>
+                </view>
+                </view>
+            </block>
+            </mp-cells>
+            <mp-cells title="活动周期">
+                <block wx:for="{{inputInfoList}}" wx:key="*this" wx:for-index="inputid" wx:if="{{inputid>=4}}">
+                <view class="weui-cell weui-cell_active">
+                <view class="weui-cell_hd"><view class="weui-label">{{inputInfoList[inputid]}}</view></view>
+                <view class="weui-cell_bd">
+                    <picker wx:if="{{inputid==4}}" mode="date" aria-role="combobox" aria-labelledby="js_date" value="{{eventdate}}" start="2023-01-01" fields="year" bind:change="inputContent" data-content="{{inputid}}">
+                        <weui-input>{{eventdate}}</weui-input>
+                    </picker>
+                    <multi-selector wx:if="{{inputid==5}}" class="selector" value="{{eventweekly}}" bind:change="inputContent" items="{{weekitems}}" placeholder="请选择每周几" show-value="{{false}}"></multi-selector>
+                </view>
+                </view>
+            </block>
+            </mp-cells>
             <button type="default" bind:tap="exitEventPage">返回</button>
-        </view>
+        </mp-form-page>
     </page-container>
 </view>
