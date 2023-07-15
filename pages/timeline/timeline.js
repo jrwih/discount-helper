@@ -56,15 +56,6 @@ class myDateList{
     }
 }
 
-var slideButtons =[{
-    text: "订阅",src:"/static/weui/outlined/like.svg",data:"0"
-},{
-    text: "编辑",src:"/static/weui/outlined/add.svg"
-},{
-    text: "删除",src:"/static/weui/outlined/delete.svg"
-}]
-
-
 Page({
 
     /**页面的初始数据
@@ -218,7 +209,7 @@ Page({
         switch(e.detail.index){
             /**订阅 */
             case 0:
-                allEvent[eventIndex].slideButtons[0].src="/static/weui/filled/like.svg";
+                allEvent[eventIndex].slideButtons[0].src=(allEvent[eventIndex].slideButtons[0].src=="/static/weui/filled/like.svg"?"/static/weui/outlined/like.svg":"/static/weui/filled/like.svg");
                 this.refreshEventList();
                 break;
             /**编辑 */
