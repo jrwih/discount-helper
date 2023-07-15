@@ -5,7 +5,6 @@
         "mp-form": "weui-miniprogram/form/form",
         "mp-checkbox-group": "weui-miniprogram/checkbox-group/checkbox-group",
         "mp-checkbox": "weui-miniprogram/checkbox/checkbox",    
-        "mp-slideview": "weui-miniprogram/slideview/slideview",
-        "multi-selector": "/components/multiSelector/multiSelector"
+        "mp-slideview": "weui-miniprogram/slideview/slideview"
     }
 }

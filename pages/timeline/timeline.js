@@ -91,7 +91,6 @@ Page({
             '每月',
         ],
         id: -1,
-        id_new: 100,//自定义活动id从101开始
         brandname: '',
         eventname: '',
         logo: '/static/images/gif001.gif',
@@ -146,6 +145,7 @@ Page({
     refreshEventList(){
         weekList = utilEvent.setPeriodList(allEvent,DateDetail);
         this.setData({eventList: weekList});
+        utilEvent.storeData(allEvent);
     },
 
     /**按照活动id查找索引 */
@@ -199,8 +199,9 @@ Page({
             allEvent[index].monthly = this.data.eventmonthly;
         }
         else{
-            this.setData({id_new: this.data.id_new+1});
-            allEvent.push(new utilEvent.myEvent(this.data.id_new,this.data.brandname,this.data.eventname,this.data.logo,this.data.eventdate,this.data.eventweekly,this.data.eventmonthly,this.data.eventtime));
+            this.setData({id: allEvent.at(-1).id+1});
+            console.log("id_new:"+this.data.id);
+            allEvent.push(new utilEvent.myEvent(this.data.id,this.data.brandname,this.data.eventname,this.data.logo,this.data.eventdate,this.data.eventweekly,this.data.eventmonthly,this.data.eventtime));
         }
         this.setData({pageShow: false})
         this.resetEventPage();
@@ -281,7 +282,6 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload() {
-
     },
 
     /**

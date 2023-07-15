@@ -1,8 +1,6 @@
 {
     "pages": [
         "pages/index/index",
-        "pages/test/test",
-        "pages/detail/detail",
         "pages/timeline/timeline",
         "pages/logs/logs"
         ],

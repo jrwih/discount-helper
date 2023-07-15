@@ -84,6 +84,20 @@ function transEvent(allEvent){
     }
     return _eventDetail;
 }
+/**将新的data写入缓存 */
+function storeData(allEvent){
+    var _eventDetail = transEvent(allEvent);
+    wx.setStorage({
+        key: '0',
+        data: _eventDetail,
+        success(){
+            console.log("写入成功");
+        },
+        fail(){
+            console.log("写入失败");
+        }
+    })
+}
 
 /**对allEvent进行遍历筛选，符合条件的列入对应的每日daylist,再将daylist合并为periodlist，适用于周期较短的情况，
  * 设O(allEvent)=m,O(period)=n，即m个活动，时间周期为n，则复杂度为O=m*n,
@@ -164,7 +178,6 @@ module .exports = {
     allEventList : allEventList,
     setEventList : setDayList,
     setPeriodList : setPeriodList,
-    transData : transData,
-    transEvent : transEvent,
+    storeData : storeData,
     myEvent : myEvent,
 }
