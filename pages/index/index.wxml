@@ -5,4 +5,4 @@
     <view class="container">优惠助手</view>
 </navigator>
 
-<image src="/static/images/gif001.gif" mode="aspectFit"/>
+<image src="https://mp-adb61297-6bf0-439f-bbc0-819881e8b3ee.cdn.bspapp.com/discount-helper/gif001.gif" mode="aspectFit"/>

@@ -46,13 +46,13 @@ function allEventList(allEvent){
         console.log("数据为空");
         allEventDetail = [
             /**id,品牌名，活动名，logo建议放在/static/images/logo/中，某天'2023,7,4'，每周几，每月几，具体时间*/
-            [0,'StarBucks','测试用例','/static/images/logo/Starbucks-logo.png','2023,7,4',-1,[11,12],'00:00'],
-            [1,'KFC','疯狂星期四','/static/images/logo/KFC-logo.png',0,[4],0,'10:00'],
-            [2,'McDonalds','麦当劳会员日','/static/images/logo/McDonalds-logo.png',0,[0,1,6],0,'10:30'],
-            [3,'蜜雪冰城','满12-2元','/static/images/logo/MiXue-logo.png',0,[3],0,'10:00'],
-            [4,'华莱士','全场6元','/static/images/logo/Wallace.png',0,-1,[6,16,26],'10:00'],
-            [5,'饿了么','抢18元红包','/static/images/logo/Eleme.png',0,[0,6],[18],'00:00'],
-            [6,'美团','抢18元红包','/static/images/logo/Meituan.png',0,[0,6],[18],'00:00'],
+            [0,'StarBucks','测试用例','https://mp-adb61297-6bf0-439f-bbc0-819881e8b3ee.cdn.bspapp.com/discount-helper/Starbucks-logo.png','2023,7,4',-1,[11,12],'00:00'],
+            [1,'KFC','疯狂星期四','https://mp-adb61297-6bf0-439f-bbc0-819881e8b3ee.cdn.bspapp.com/discount-helper/KFC-logo.png',0,[4],0,'10:00'],
+            [2,'McDonalds','麦当劳会员日','https://mp-adb61297-6bf0-439f-bbc0-819881e8b3ee.cdn.bspapp.com/discount-helper/McDonalds-logo.png',0,[0,1,6],0,'10:30'],
+            [3,'蜜雪冰城','满12-2元','https://mp-adb61297-6bf0-439f-bbc0-819881e8b3ee.cdn.bspapp.com/discount-helper/MiXue-logo.png',0,[3],0,'10:00'],
+            [4,'华莱士','全场6元','https://mp-adb61297-6bf0-439f-bbc0-819881e8b3ee.cdn.bspapp.com/discount-helper/Wallace.png',0,-1,[6,16,26],'10:00'],
+            [5,'饿了么','抢18元红包','https://mp-adb61297-6bf0-439f-bbc0-819881e8b3ee.cdn.bspapp.com/discount-helper/Eleme.png',0,[0,6],[18],'00:00'],
+            [6,'美团','抢18元红包','https://mp-adb61297-6bf0-439f-bbc0-819881e8b3ee.cdn.bspapp.com/discount-helper/Meituan.png',0,[0,6],[18],'00:00'],
         ]
         wx.setStorage({
             key: '0',

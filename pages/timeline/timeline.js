@@ -84,7 +84,7 @@ Page({
         id: -1,
         brandname: '',
         eventname: '',
-        logo: '/static/images/gif001.gif',
+        logo: 'https://mp-adb61297-6bf0-439f-bbc0-819881e8b3ee.cdn.bspapp.com/discount-helper/gif001.gif',
         eventtime: '00:00',
         eventdate: '2023-00-00',
         eventweekly: [],
